@@ -26,8 +26,9 @@ if (sizeof($_SESSION['errors']) > 0) {
     try {
         $query = $file_db->prepare("INSERT INTO messages (subject, content, `time`, `from`, `to`) VALUES (?, ?, ?, ?, ?)");
         $query->execute([
-            $_POST['subject'],
-            $_POST['content'],
+            // string encoded in HTML to avoid XSS attacks 
+            htmlspecialchars($_POST['subject']),
+            htmlspecialchars($_POST['content']),
             time(),
             $auth_user,
             $_POST['sendTo']
