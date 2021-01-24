@@ -4,6 +4,7 @@ include "../../../databases/db_connection.php";
 session_start();
 include "../../scripts/check_authentication.php";
 include "../../scripts/check_is_admin.php";
+include "../../scripts/password.php";
 
 // Make sure all paramaters have been passed
 if( !isset($_POST['username']) || !isset($_POST['password']) ){
@@ -22,7 +23,7 @@ if(!empty($username)){
 
 // Create the user
 $sql = $file_db->prepare("INSERT INTO users VALUES (?,?,?,?)");
-$result = $sql->execute([$_POST['username'], password_hash( $_POST['password'], PASSWORD_BCRYPT), isset($_POST['is_admin']), isset($_POST['is_active'])]);
+$result = $sql->execute([$_POST['username'], hash_password( $_POST['password']), isset($_POST['is_admin']), isset($_POST['is_active'])]);
 
 // Redirect the user
 header('Location: /views/users/show_users.php?');
