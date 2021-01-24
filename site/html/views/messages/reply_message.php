@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "../../../databases/db_connection.php";
+include "../../scripts/csrf_token.php";
 $query = $file_db->prepare("SELECT * FROM messages WHERE id = ?");
 $query->execute([$_GET['id']]);
 $message = $query->fetch();
@@ -29,6 +30,7 @@ function printValidity($field_name) {
     <div class="row">
         <div class="col">
             <form action="/controllers/messages/reply_message.php" method="post">
+                <input type="hidden" name="csrf_token" value="<?=generate_token()?>" />
                 <input type="hidden" name="id" value="<?=$message['id']?>">
                 <div class="form-group">
                     <label for="content">RE: <?=$message['subject']?></label>

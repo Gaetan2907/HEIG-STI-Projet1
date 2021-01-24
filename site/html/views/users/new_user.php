@@ -2,6 +2,7 @@
 session_start();
 include "../../scripts/check_authentication.php";
 include "../../scripts/check_is_admin.php";
+include "../../scripts/csrf_token.php";
 ?>
 <!doctype html>
 <html>
@@ -11,6 +12,8 @@ include "../../scripts/check_is_admin.php";
     <div class="container">
         <h1 class="mt-2">Ajout Utilisateur</h1>
         <form action="/controllers/users/store_user.php" method="post">
+            <input type="hidden" name="csrf_token" value="<?=generate_token()?>" />
+
             <div class="form-group">
                 <label for="username">Nom d'utilisateur</label>
                 <input type="text" class="form-control" id="username" name="username" required>

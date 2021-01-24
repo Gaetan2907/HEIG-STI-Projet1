@@ -3,6 +3,12 @@ session_start();
 include "../../../databases/db_connection.php";
 include "../../scripts/check_authentication.php";
 
+if ($_POST["csrf_token"] != $_SESSION["csrf_token"]) {
+    // Reset token
+    unset($_SESSION["csrf_token"]);
+    die("validation token CSRF token échouée");
+}
+
 // vérification des champs et affectation des variables d'erreurs
 $_SESSION['errors'] = [];
 $_SESSION['old_post'] = $_POST;

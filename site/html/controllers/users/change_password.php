@@ -5,6 +5,12 @@ session_start();
 include "../../scripts/check_authentication.php";
 include "../../scripts/password.php";
 
+if ($_POST["csrf_token"] != $_SESSION["csrf_token"]) {
+    // Reset token
+    unset($_SESSION["csrf_token"]);
+    die("validation token CSRF token échouée");
+}
+
 // Check if the new password was sent
 if( !isset($_POST['password']) || !checkPassword($_POST['password'])){
     header('Location: /views/users/change_password.php');
