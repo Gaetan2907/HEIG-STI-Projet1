@@ -1,4 +1,4 @@
-# HEIG-STI-Projet1 - Groupe 11
+# HEIG-STI-Projet2 - Groupe 12
 
 ## Install
 Depuis le répertoire racine du repo, exécuter les commandes suivantes : 
@@ -26,9 +26,9 @@ Si un utilisateur n'est pas connecté, une page de login lui sera presenté.
 Les utilisateurs suivants sont disponibles:
 | User  |  Password | Admin  | Actif  |
 |---|---|---|---|
-| admin | admin1234  | Oui  | Oui  |
-| toto | toto1234  | Non  | Oui  |
-| tata | tata1234  | Oui  | Non  |
+| admin | adminP@$$w0rd  | Oui  | Oui  |
+| toto | totoP@$$w0rd  | Non  | Oui  |
+| tata | tataP@$$w0rd  | Oui  | Non  |
 
 ### Voir les messages reçus
 Lorsqu'on se connecte, on arrive sur cette page. Il est aussi possible d'y accéder en cliquant sur le lien `Mes messages` dans la barre de navigation.  

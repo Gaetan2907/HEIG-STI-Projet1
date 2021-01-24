@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+include "../../scripts/csrf_token.php";
+
 // gestion des messages d'erreur
 // récupération des anciennes valeurs
 if (isset($_SESSION['errors'])) {
@@ -29,6 +31,7 @@ function printValidity($field_name) {
         <div class="row">
             <div class="col">
                 <form action="/controllers/messages/store_message.php" method="post">
+                    <input type="hidden" name="csrf_token" value="<?=generate_token()?>" />
                     <div class="form-group">
                         <label for="sendTo">Pseudo a contacter</label>
                         <input type="text"

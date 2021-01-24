@@ -12,7 +12,7 @@ $sql->execute([$user]);
 $db_user = $sql->fetch();
 
 // Check if passwords match
-if( !empty($db_user) && $db_user['is_active'] && $password == $db_user['password']){
+if( !empty($db_user) && $db_user['is_active'] && password_verify($password, $db_user['password'])){
     // Start a new session for this user
     session_start();
     $_SESSION["user"] = $db_user['username'];

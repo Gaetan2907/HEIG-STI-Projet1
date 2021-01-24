@@ -2,6 +2,7 @@
 session_start();
 include "../../scripts/check_authentication.php";
 include "../../scripts/check_is_admin.php";
+include "../../scripts/csrf_token.php";
 
 $sql = $file_db->prepare("SELECT * FROM users WHERE `username` = ?");
 $sql->execute([$_GET['username']]);
@@ -21,6 +22,7 @@ if(empty($user)){
     <div class="container">
         <h1 class="mt-2">Modification Utilisateur</h1>
         <form action="/controllers/users/update_user.php" method="post">
+            <input type="hidden" name="csrf_token" value="<?=generate_token()?>" />
             <div class="form-group">
                 <label for="username">Nom d'utilisateur</label>
                 <input type="text" class="form-control" id="username" name="username" value="<?=$user['username']?>" readonly>
@@ -37,6 +39,7 @@ if(empty($user)){
         </form>
         <br>
         <form action="/controllers/users/delete_user.php" method="post">
+            <input type="hidden" name="csrf_token" value="<?=generate_token()?>" />
             <input type="hidden" name="username" value="<?=$user['username']?>">
 
             <button type="submit" class="btn btn-danger">Supprimer</button>

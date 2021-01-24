@@ -4,9 +4,16 @@ include "../../../databases/db_connection.php";
 session_start();
 include "../../scripts/check_authentication.php";
 include "../../scripts/check_is_admin.php";
+include "../../scripts/password.php";
+
+if ($_POST["csrf_token"] != $_SESSION["csrf_token"]) {
+    // Reset token
+    unset($_SESSION["csrf_token"]);
+    die("validation token CSRF token échouée");
+}
 
 // Make sure all paramaters have been passed
-if( !isset($_POST['username']) || !isset($_POST['password']) ){
+if( !isset($_POST['username']) || !isset($_POST['password']) || !checkPassword($_POST['password'])){
     header('Location: /views/users/new_user.php');
     die();
 }
@@ -22,7 +29,7 @@ if(!empty($username)){
 
 // Create the user
 $sql = $file_db->prepare("INSERT INTO users VALUES (?,?,?,?)");
-$result = $sql->execute([$_POST['username'], $_POST['password'], isset($_POST['is_admin']), isset($_POST['is_active'])]);
+$result = $sql->execute([$_POST['username'], hash_password( $_POST['password']), isset($_POST['is_admin']), isset($_POST['is_active'])]);
 
 // Redirect the user
 header('Location: /views/users/show_users.php?');
