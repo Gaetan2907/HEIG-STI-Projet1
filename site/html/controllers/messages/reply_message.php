@@ -31,8 +31,8 @@ if (sizeof($_SESSION['errors']) > 0) {
     // send the new message
     $query = $file_db->prepare("INSERT INTO messages (subject, content, `time`, `from`, `to`, reply_id) VALUES (?, ?, ?, ?, ?, ?)");
     $query->execute([
-        $message['subject'],
-        $_POST['content'],
+        htmlspecialchars($message['subject']),
+        htmlspecialchars($_POST['content']),
         time(),
         $auth_user,
         $message['from'],

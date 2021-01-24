@@ -22,9 +22,9 @@ $auth_user = $_SESSION['user'];
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title"><?=($message['reply_id']? 'RE: ' : '').$message['subject']?></h5>
-                            <h6 class="card-subtitle mb-2 text-muted"><?=$message['from']?> - <?=date('d F Y H:i', $message['time'])?></h6>
-                            <p class="card-text collapse" id="collapseContent<?=$message['id']?>"><?=$message['content']?></p>
+                            <h5 class="card-title"><?=(htmlspecialchars($message['reply_id'])? 'RE: ' : '').htmlspecialchars($message['subject'])?></h5>
+                            <h6 class="card-subtitle mb-2 text-muted"><?=htmlspecialchars($message['from'])?> - <?=date('d F Y H:i', htmlspecialchars($message['time']))?></h6>
+                            <p class="card-text collapse" id="collapseContent<?=htmlspecialchars($message['id'])?>"><?=htmlspecialchars($message['content'])?></p>
 
                         </div>
                         <div class="card-footer">
