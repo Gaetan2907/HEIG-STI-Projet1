@@ -19,7 +19,7 @@ if(empty($_POST['password'])){
 else{
     // Update the user
     $sql = $file_db->prepare("UPDATE users SET `password` = ?, `is_admin` = ? WHERE `username` = ?");
-    $result = $sql->execute([$_POST['password'], isset($_POST['is_admin']), $_POST['username']]);
+    $result = $sql->execute([password_hash($_POST['password'], PASSWORD_BCRYPT), isset($_POST['is_admin']), $_POST['username']]);
 }
 
 // Redirect the user
