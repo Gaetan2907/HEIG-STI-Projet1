@@ -6,8 +6,8 @@ include "../../scripts/check_authentication.php";
 include "../../scripts/password.php";
 
 // Check if the new password was sent
-if( !isset($_POST['password'])){
-    header('Location: views/users/change_password.php');
+if( !isset($_POST['password']) || !checkPassword($_POST['password'])){
+    header('Location: /views/users/change_password.php');
     die();
 }
 

@@ -7,7 +7,7 @@ include "../../scripts/check_is_admin.php";
 include "../../scripts/password.php";
 
 // Make sure all paramaters have been passed
-if( !isset($_POST['username']) || !isset($_POST['password']) ){
+if( !isset($_POST['username']) || !isset($_POST['password']) || !checkPassword($_POST['password'])){
     header('Location: /views/users/new_user.php');
     die();
 }
